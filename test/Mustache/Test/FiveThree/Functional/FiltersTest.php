@@ -13,11 +13,11 @@
  * @group filters
  * @group functional
  */
-class Mustache_Test_FiveThree_Functional_FiltersTest extends PHPUnit_Framework_TestCase
+class Mustache_Test_FiveThree_Functional_FiltersTest extends Yoast\PHPUnitPolyfills\TestCases\TestCase
 {
     private $mustache;
 
-    public function setUp()
+    public function set_up()
     {
         $this->mustache = new Mustache_Engine();
     }
@@ -128,11 +128,11 @@ EOS;
     }
 
     /**
-     * @expectedException Mustache_Exception_UnknownFilterException
      * @dataProvider brokenPipeData
      */
     public function testThrowsExceptionForBrokenPipes($tpl, $data)
     {
+        $this->expectException(Mustache_Exception_UnknownFilterException::class);
         $this->mustache->render($tpl, $data);
     }
 

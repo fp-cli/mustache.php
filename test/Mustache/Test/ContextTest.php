@@ -12,7 +12,7 @@
 /**
  * @group unit
  */
-class Mustache_Test_ContextTest extends PHPUnit_Framework_TestCase
+class Mustache_Test_ContextTest extends Yoast\PHPUnitPolyfills\TestCases\TestCase
 {
     public function testConstructor()
     {
@@ -171,11 +171,9 @@ class Mustache_Test_ContextTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $context->findAnchoredDot('.child.name'));
     }
 
-    /**
-     * @expectedException Mustache_Exception_InvalidArgumentException
-     */
     public function testAnchoredDotNotationThrowsExceptions()
     {
+        $this->expectException(Mustache_Exception_InvalidArgumentException::class);
         $context = new Mustache_Context();
         $context->push(array('a' => 1));
         $context->findAnchoredDot('a');
@@ -264,6 +262,7 @@ class Mustache_Test_TestArrayAccess implements ArrayAccess
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -273,16 +272,19 @@ class Mustache_Test_TestArrayAccess implements ArrayAccess
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -300,11 +302,13 @@ class Mustache_Test_AllTheThings implements ArrayAccess
         return 'win';
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return true;
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         switch ($offset) {
@@ -321,11 +325,13 @@ class Mustache_Test_AllTheThings implements ArrayAccess
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         // nada
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         // nada

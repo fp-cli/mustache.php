@@ -12,7 +12,7 @@
 /**
  * @group unit
  */
-class Mustache_Test_CompilerTest extends PHPUnit_Framework_TestCase
+class Mustache_Test_CompilerTest extends Yoast\PHPUnitPolyfills\TestCases\TestCase
 {
     /**
      * @dataProvider getCompileValues
@@ -23,7 +23,7 @@ class Mustache_Test_CompilerTest extends PHPUnit_Framework_TestCase
 
         $compiled = $compiler->compile($source, $tree, $name, $customEscaper, $charset, false, $entityFlags);
         foreach ($expected as $contains) {
-            $this->assertContains($contains, $compiled);
+            $this->assertStringContainsString($contains, $compiled);
         }
     }
 
@@ -132,11 +132,9 @@ class Mustache_Test_CompilerTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @expectedException Mustache_Exception_SyntaxException
-     */
     public function testCompilerThrowsSyntaxException()
     {
+        $this->expectException(Mustache_Exception_SyntaxException::class);
         $compiler = new Mustache_Compiler();
         $compiler->compile('', array(array(Mustache_Tokenizer::TYPE => 'invalid')), 'SomeClass');
     }

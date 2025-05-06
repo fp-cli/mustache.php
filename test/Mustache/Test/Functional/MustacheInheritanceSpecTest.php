@@ -25,7 +25,7 @@ class Mustache_Test_Functional_MustacheInheritanceSpecTest extends Mustache_Test
         'Nested block reindentation: Nested blocks are reindented relative to the surrounding block',
     );
 
-    public static function setUpBeforeClass()
+    public static function set_up_before_class()
     {
         self::$mustache = new Mustache_Engine(array(
           'pragmas' => array(Mustache_Engine::PRAGMA_BLOCKS),
@@ -35,6 +35,8 @@ class Mustache_Test_Functional_MustacheInheritanceSpecTest extends Mustache_Test
     /**
      * For some reason data providers can't mark tests skipped, so this test exists
      * simply to provide a 'skipped' test if the `spec` submodule isn't initialized.
+     *
+     * @doesNotPerformAssertions
      */
     public function testSpecInitialized()
     {
